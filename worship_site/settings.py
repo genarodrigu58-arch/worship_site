@@ -132,3 +132,17 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'posts'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Producción
+DEBUG = False
+
+# Permitir el dominio de Render
+ALLOWED_HOSTS = ['https://worship-site.onrender.com']
+
+# Variables de entorno
+SECRET_KEY = os.environ.get('SECRET_KEY', 'temporal-para-dev')
+
+# Archivos estáticos
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = '/static/'
