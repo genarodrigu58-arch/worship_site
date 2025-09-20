@@ -138,7 +138,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEBUG = False
 
 # Permitir el dominio de Render
-ALLOWED_HOSTS = ['https://worship-site.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 # Variables de entorno
 SECRET_KEY = os.environ.get('SECRET_KEY', 'temporal-para-dev')
