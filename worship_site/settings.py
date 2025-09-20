@@ -135,7 +135,7 @@ LOGIN_REDIRECT_URL = 'posts'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Producción
-DEBUG = False
+DEBUG = True
 
 # Permitir el dominio de Render
 ALLOWED_HOSTS = ['*']
