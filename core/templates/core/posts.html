@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Publicaciones{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Publicaciones del Equipo</h2>
+
+<!-- Formulario para crear nueva publicación -->
+<form method="post" class="mb-4">
+    {% csrf_token %}
+    <textarea name="content" class="form-control mb-2" placeholder="Escribe algo..." required></textarea>
+    <button type="submit" class="btn btn-primary">Publicar</button>
+</form>
+
+<!-- Lista de publicaciones -->
+{% for post in posts %}
+<div class="card p-3 mb-3">
+    <div class="d-flex align-items-center mb-2">
+        <!-- Foto de perfil -->
+        {% if post.author.profile.avatar %}
+            <img src="{{ post.author.profile.avatar.url }}" alt="Avatar" 
+                 class="rounded-circle me-2" 
+                 style="width:40px; height:40px; object-fit:cover;">
+        {% else %}
+            <img src="{% static 'core/default-avatar.png' %}" alt="Avatar" 
+                 class="rounded-circle me-2" 
+                 style="width:40px; height:40px; object-fit:cover;">
+        {% endif %}
+
+        <!-- Nombre + instrumento -->
+        <div>
+            <strong>{{ post.author.username }}</strong>
+            {% if post.author.profile.instrument %}
+                - <em>{{ post.author.profile.instrument }}</em>
+            {% endif %}
+        </div>
+
+        <small class="ms-auto text-muted">{{ post.created_at }}</small>
+    </div>
+
+    <p>{{ post.content }}</p>
+
+    <!-- Opciones para el autor -->
+    {% if post.author == user %}
+    <div class="mt-2">
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-secondary">Editar</a>
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger">Borrar</a>
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

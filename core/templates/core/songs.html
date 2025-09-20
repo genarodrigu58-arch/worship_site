@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Repertorio{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Repertorio de Canciones</h2>
+
+<!-- Buscador -->
+<form method="get" class="mb-4">
+    <input type="text" name="q" placeholder="Buscar canción..." class="form-control" value="{{ request.GET.q }}">
+</form>
+
+<div class="accordion" id="songsAccordion">
+    {% for song in songs %}
+    <div class="accordion-item mb-3" style="background-color:#1b263b; border-radius:10px;">
+        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}" style="color:#ffffff; background-color:#1b263b;">
+                {{ song.title }}{% if song.author %} - {{ song.author }}{% endif %}
+            </button>
+        </h2>
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#songsAccordion">
+            <div class="accordion-body" style="background-color:#f8f9fa; color:#0d1b2a; font-family:monospace; border-radius:8px; white-space: pre-wrap;">
+                {{ song.notes }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay canciones cargadas aún.</p>
+    {% endfor %}
+</div>
+{% endblock %}

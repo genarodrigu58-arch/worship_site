@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block title %}Anuncios{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Anuncios del Equipo</h2>
+
+{% if announcements %}
+    {% for announcement in announcements %}
+        <div class="card p-3 mb-3">
+            <h5>{{ announcement.title }}</h5>
+            <p>{{ announcement.content }}</p>
+            <small class="text-muted">{{ announcement.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay anuncios por ahora.</p>
+{% endif %}
+{% endblock %}

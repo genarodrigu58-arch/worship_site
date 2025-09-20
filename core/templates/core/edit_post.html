@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Editar Publicación{% endblock %}
+
+{% block content %}
+<h2>Editar Publicación</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <textarea class="form-control" name="content" required>{{ post.content }}</textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Guardar Cambios</button>
+  <a href="{% url 'posts' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
